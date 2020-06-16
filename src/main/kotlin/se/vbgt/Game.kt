@@ -25,17 +25,22 @@ class Game(
     fun score(whichPlayer: PlayerChoice) {
         require(!isOver())
 
-        sets = when {
-            sets.isEmpty() || sets.last().isOver() -> {
-                sets + Set(setThresholdWin)
-            }
-            else -> sets
-        }
+        ballsPlayed = ballsPlayed.inc()
+        maybeSwitchPlayer()
 
+        sets = maybeAddSet()
         sets.last().score(whichPlayer)
+    }
 
-        if (ballsPlayed.inc() >= ballsBeforeSwitch) {
-            ballsPlayed = 0
+    private fun maybeAddSet(): List<Set> {
+        return if (sets.isEmpty() || sets.last().isOver())
+            sets + Set(setThresholdWin)
+        else
+            sets
+    }
+
+    private fun maybeSwitchPlayer() {
+        if (ballsPlayed > 0 && ballsPlayed % ballsBeforeSwitch == 0) {
             activePlayer = activePlayer.nextPlayer()
         }
     }
@@ -44,7 +49,7 @@ class Game(
         sets.filter { it.isOver() }
             .map { it.getWinner() }
             .fold(mapOf(), ::foldFun)
-            .any { it.value > numberOfSets / 2 }
+            .any { it.value >= numberOfSets / 2 }
 
     fun getWinner(): PlayerChoice {
         require(isOver())
