@@ -39,10 +39,10 @@ class SetTest : TestCase() {
     fun testWinWithTwo() {
         val set = Set(11)
 
-        for (i in 1..10)
+        for (i in 1..10) {
             set.score(PLAYER_1)
-        for (i in 1..10)
             set.score(PLAYER_2)
+        }
 
         set.score(PLAYER_1)
 
