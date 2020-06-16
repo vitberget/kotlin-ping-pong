@@ -41,7 +41,10 @@ class Game(
     }
 
     fun isOver(): Boolean =
-        sets.count() == numberOfSets && sets.last().isOver()
+        sets.filter { it.isOver() }
+            .map { it.getWinner() }
+            .fold(mapOf(), ::foldFun)
+            .any { it.value > numberOfSets / 2 }
 
     fun getWinner(): PlayerChoice {
         require(isOver())
