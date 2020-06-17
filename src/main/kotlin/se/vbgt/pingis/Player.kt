@@ -1,4 +1,4 @@
-package se.vbgt
+package se.vbgt.pingis
 
 data class Player(val name: String)
 

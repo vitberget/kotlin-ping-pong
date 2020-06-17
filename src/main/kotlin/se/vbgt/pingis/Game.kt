@@ -1,6 +1,5 @@
-package se.vbgt
-
-import se.vbgt.PlayerChoice.PLAYER_1
+package se.vbgt.pingis
+import se.vbgt.pingis.PlayerChoice.PLAYER_1
 
 class Game(
     val player1: Player,

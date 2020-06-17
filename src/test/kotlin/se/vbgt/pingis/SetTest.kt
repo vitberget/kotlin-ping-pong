@@ -1,8 +1,8 @@
-package se.vbgt
+package se.vbgt.pingis
 
 import junit.framework.TestCase
-import se.vbgt.PlayerChoice.PLAYER_1
-import se.vbgt.PlayerChoice.PLAYER_2
+import se.vbgt.pingis.PlayerChoice.PLAYER_1
+import se.vbgt.pingis.PlayerChoice.PLAYER_2
 import kotlin.test.assertFails
 
 class SetTest : TestCase() {

@@ -1,7 +1,8 @@
-package se.vbgt
+package se.vbgt.pingis
 
-import se.vbgt.PlayerChoice.PLAYER_1
-import se.vbgt.PlayerChoice.PLAYER_2
+import se.vbgt.pingis.PlayerChoice
+import se.vbgt.pingis.PlayerChoice.PLAYER_1
+import se.vbgt.pingis.PlayerChoice.PLAYER_2
 
 class Set(val thresholdWin: Int) {
     var scorePlayer1 = 0
