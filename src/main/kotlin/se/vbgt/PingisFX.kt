@@ -8,9 +8,10 @@ import javafx.stage.Stage
 
 class PingisFX : Application() {
     override fun start(stage: Stage?) {
+        requireNotNull(stage)
         val label = Label("Hwllo universe")
         val scene = Scene(StackPane(label), 640.0, 480.0)
-        stage!!.scene = scene
+        stage.scene = scene
         stage.show()
     }
 
