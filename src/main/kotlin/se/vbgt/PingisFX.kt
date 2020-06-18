@@ -2,53 +2,65 @@ package se.vbgt
 
 import javafx.application.Application
 import javafx.application.Platform
-import javafx.beans.binding.Bindings
-import javafx.collections.FXCollections
-import javafx.collections.ObservableList
 import javafx.scene.Scene
 import javafx.scene.control.Label
 import javafx.scene.layout.StackPane
 import javafx.stage.Stage
-import java.util.ArrayList
-import java.util.concurrent.Callable
+import se.vbgt.pingis.Game
+import se.vbgt.pingis.Player
+import se.vbgt.pingis.PlayerChoice
+import se.vbgt.pingis.PlayerChoice.PLAYER_1
+import se.vbgt.pingis.PlayerChoice.PLAYER_2
 
 
 class PingisFX : Application() {
-    private lateinit var observableList: ObservableList<String>
+
+    val game = Game(
+        player1 = Player("one"),
+        player2 = Player("two")
+    )
 
     override fun start(stage: Stage?) {
         requireNotNull(stage)
         println("start stage")
 
-        val label = Label()
-        val list: MutableList<String> = ArrayList()
-        list.add("hello")
+        val label = Label(getPlayerName(game.activePlayer))
 
-        observableList = FXCollections.observableList(list)
+        game.onActivePlayerChange = { oldVal: PlayerChoice, newVal: PlayerChoice ->
+            Platform.runLater {
+                label.text = getPlayerName(newVal)
+            }
+        }
 
-        label.textProperty().bind(
-            Bindings.createStringBinding(
-                Callable { observableList.last() },
-                observableList
-            )
+        val myScene = Scene(
+            StackPane(label),
+            640.toDouble(),
+            480.toDouble()
         )
 
-
-        val scene = Scene(StackPane(label), 640.0, 480.0)
-        stage.scene = scene
-        stage.show()
+        stage.apply {
+            scene = myScene
+            show()
+        }
 
         startThread()
-
     }
+
+    private fun getPlayerName(newVal: PlayerChoice): String =
+        when (newVal) {
+            PLAYER_1 -> game.player1.name
+            PLAYER_2 -> game.player2.name
+        }
 
     private fun startThread() {
         Thread {
-            Thread.sleep(1000)
-            println("woho")
-            Platform.runLater { observableList.add("woho") }
-        }.start()
+            for (i in 1..10) {
+                Thread.sleep(1000)
+                println("woho")
 
+                game.score(PLAYER_1)
+            }
+        }.start()
     }
 }
 

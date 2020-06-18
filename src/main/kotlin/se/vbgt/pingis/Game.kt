@@ -1,5 +1,8 @@
 package se.vbgt.pingis
+
 import se.vbgt.pingis.PlayerChoice.PLAYER_1
+import kotlin.properties.Delegates
+import kotlin.properties.Delegates.observable
 
 class Game(
     val player1: Player,
@@ -13,8 +16,14 @@ class Game(
         require(setThresholdWin >= 2) { "Must have at least two balls per set" }
     }
 
-    var activePlayer = PLAYER_1
+    var activePlayer: PlayerChoice by observable(PLAYER_1) { _, oldVal, newVal ->
+        onActivePlayerChange?.invoke(
+            oldVal,
+            newVal
+        )
+    }
         private set
+
 
     var sets = listOf<Set>()
         private set
@@ -63,4 +72,8 @@ class Game(
 
     private fun foldFun(acc: Map<PlayerChoice, Int>, pc: PlayerChoice): Map<PlayerChoice, Int> =
         acc.plus(pc to acc.getOrDefault(pc, 0))
+
+
+    // Listenersithinguemybob
+    var onActivePlayerChange: ((PlayerChoice, PlayerChoice) -> Unit)? = null
 }
