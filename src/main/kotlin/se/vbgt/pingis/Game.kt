@@ -1,7 +1,7 @@
 package se.vbgt.pingis
 
 import se.vbgt.pingis.PlayerChoice.PLAYER_1
-import kotlin.properties.Delegates
+import se.vbgt.pingis.PlayerChoice.PLAYER_2
 import kotlin.properties.Delegates.observable
 
 class Game(
@@ -28,6 +28,24 @@ class Game(
     var sets = listOf<Set>()
         private set
 
+    fun getScore(playerChoice: PlayerChoice): Int =
+        if (sets.isEmpty() || sets.last().isOver())
+            0
+        else
+            when (playerChoice) {
+                PLAYER_1 -> sets.last().scorePlayer1
+                PLAYER_2 -> sets.last().scorePlayer2
+            }
+
+    fun getSetScore(playerChoice: PlayerChoice): Int =
+        if (sets.isEmpty())
+            0
+        else
+            sets.filter { it.isOver() }
+                .map { it.getWinner() }
+                .filter { it == playerChoice }
+                .count()
+
     private var ballsPlayed = 0
 
     fun score(whichPlayer: PlayerChoice) {
@@ -38,6 +56,8 @@ class Game(
 
         sets = maybeAddSet()
         sets.last().score(whichPlayer)
+
+        onGameChange?.invoke(this)
     }
 
     private fun maybeAddSet(): List<Set> {
@@ -76,4 +96,5 @@ class Game(
 
     // Listenersithinguemybob
     var onActivePlayerChange: ((PlayerChoice, PlayerChoice) -> Unit)? = null
+    var onGameChange: ((Game) -> Unit)? = null
 }
