@@ -2,26 +2,21 @@ package se.vbgt.pingis
 
 import se.vbgt.pingis.PlayerChoice.PLAYER_1
 import se.vbgt.pingis.PlayerChoice.PLAYER_2
-import kotlin.properties.Delegates.observable
 
 class Game(
     val player1: Player,
     val player2: Player,
-    val numberOfSets: Int = 3,
+    val numberOfSets: Int = 5,
     val setThresholdWin: Int = 11,
     val ballsBeforeSwitch: Int = 1
 ) {
     init {
         require(numberOfSets >= 1) { "Must have sets" }
+        require(numberOfSets % 2 == 1) { "Must have odd number of sets" }
         require(setThresholdWin >= 2) { "Must have at least two balls per set" }
     }
 
-    var activePlayer: PlayerChoice by observable(PLAYER_1) { _, oldVal, newVal ->
-        onActivePlayerChange?.invoke(
-            oldVal,
-            newVal
-        )
-    }
+    var activePlayer: PlayerChoice = PLAYER_1
         private set
 
 
@@ -77,7 +72,7 @@ class Game(
         sets.filter { it.isOver() }
             .map { it.getWinner() }
             .fold(mapOf(), ::foldFun)
-            .any { it.value >= numberOfSets / 2 }
+            .any { it.value > numberOfSets / 2 }
 
     fun getWinner(): PlayerChoice {
         require(isOver())
@@ -91,10 +86,7 @@ class Game(
     }
 
     private fun foldFun(acc: Map<PlayerChoice, Int>, pc: PlayerChoice): Map<PlayerChoice, Int> =
-        acc.plus(pc to acc.getOrDefault(pc, 0))
-
-
-    // Listenersithinguemybob
-    var onActivePlayerChange: ((PlayerChoice, PlayerChoice) -> Unit)? = null
+        acc.plus(pc to acc.getOrDefault(pc, 0).inc())
+    
     var onGameChange: ((Game) -> Unit)? = null
 }
