@@ -25,10 +25,11 @@ class PingisFX : Application() {
         removeThisThread()
 
         stage.apply {
-            scene = newGameScene
-            isFullScreen = true
+            fullScreenExitHint = ""
             show()
         }
+
+        createNewGame()
     }
 
     private fun removeThisThread() {
@@ -44,7 +45,10 @@ class PingisFX : Application() {
     }
 
     fun createNewGame() {
-        TODO("New game")
+        Platform.runLater {
+            stage.scene = newGameScene
+            stage.isFullScreen = true
+        }
     }
 
     fun startGame(game: Game) {
