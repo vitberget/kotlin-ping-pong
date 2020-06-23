@@ -32,8 +32,8 @@ fun scoreBoardScene(pingisFX: PingisFX, game: Game): Scene {
     listOf(scoreLabel1, setsLabel1, nameLabel1).forEach { it.background = background1 }
     listOf(scoreLabel2, setsLabel2, nameLabel2).forEach { it.background = background2 }
 
-    scoreLabel1.underlineProperty().set(game.activePlayer == PLAYER_1)
-    scoreLabel2.underlineProperty().set(game.activePlayer == PLAYER_2)
+    scoreLabel1.underlineProperty().set(game.getActivePlayer() == PLAYER_1)
+    scoreLabel2.underlineProperty().set(game.getActivePlayer() == PLAYER_2)
 
     val smallLabels = listOf(nameLabel1, nameLabel2, setsLabel1, setsLabel2)
     val bigLabels = listOf(scoreLabel1, scoreLabel2)
@@ -53,8 +53,8 @@ fun scoreBoardScene(pingisFX: PingisFX, game: Game): Scene {
                 setsLabel1.text = "${gameState.getSetScore(PLAYER_1)}"
                 setsLabel2.text = "${gameState.getSetScore(PLAYER_2)}"
 
-                scoreLabel1.underlineProperty().set(gameState.activePlayer == PLAYER_1)
-                scoreLabel2.underlineProperty().set(gameState.activePlayer == PLAYER_2)
+                scoreLabel1.underlineProperty().set(gameState.getActivePlayer() == PLAYER_1)
+                scoreLabel2.underlineProperty().set(gameState.getActivePlayer() == PLAYER_2)
             }
     }
 
@@ -95,6 +95,7 @@ fun scoreBoardScene(pingisFX: PingisFX, game: Game): Scene {
         when (event.character) {
             "z" -> game.score(PLAYER_1)
             "x" -> game.score(PLAYER_2)
+            "u" -> game.undoScore()
         }
     }
 

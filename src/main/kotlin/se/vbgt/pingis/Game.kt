@@ -16,10 +16,6 @@ class Game(
         require(setThresholdWin >= 2) { "Must have at least two balls per set" }
     }
 
-    var activePlayer: PlayerChoice = PLAYER_1
-        private set
-
-
     var sets = listOf<Set>()
         private set
 
@@ -41,13 +37,19 @@ class Game(
                 .filter { it == playerChoice }
                 .count()
 
-    private var ballsPlayed = 0
+    private var ballsWon = listOf<PlayerChoice>()
+
+    fun getActivePlayer(): PlayerChoice {
+        val divided = ballsWon.size / ballsBeforeSwitch
+        val even = divided % 2 == 0
+        return if (even) PLAYER_1 else PLAYER_2
+    }
 
     fun score(whichPlayer: PlayerChoice) {
         require(!isOver())
 
-        ballsPlayed = ballsPlayed.inc()
-        maybeSwitchPlayer()
+        ballsWon = ballsWon + whichPlayer
+//        maybeSwitchPlayer()
 
         sets = maybeAddSet()
         sets.last().score(whichPlayer)
@@ -61,11 +63,24 @@ class Game(
         else
             sets
     }
+//
+//    private fun maybeSwitchPlayer() {
+//        val ballsPlayed = ballsWon.size
+//        if (ballsPlayed > 0 && ballsPlayed % ballsBeforeSwitch == 0) {
+//            activePlayer = activePlayer.nextPlayer()
+//        }
+//    }
 
-    private fun maybeSwitchPlayer() {
-        if (ballsPlayed > 0 && ballsPlayed % ballsBeforeSwitch == 0) {
-            activePlayer = activePlayer.nextPlayer()
+    fun undoScore() {
+        val tempBallsWon = ballsWon.dropLast(1)
+        sets = listOf()
+        ballsWon = listOf()
+
+        tempBallsWon.forEach {
+            score(it)
         }
+
+        onGameChange?.invoke(this)
     }
 
     fun isOver(): Boolean =

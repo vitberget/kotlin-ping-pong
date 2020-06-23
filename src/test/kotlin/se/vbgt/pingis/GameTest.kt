@@ -86,9 +86,9 @@ class GameTest : TestCase() {
         )
 
         for (i in 1..10) {
-            assertEquals(PLAYER_1, game.activePlayer)
+            assertEquals(PLAYER_1, game.getActivePlayer())
             game.score(PLAYER_1)
-            assertEquals(PLAYER_2, game.activePlayer)
+            assertEquals(PLAYER_2, game.getActivePlayer())
             game.score(PLAYER_1)
         }
     }
@@ -101,14 +101,14 @@ class GameTest : TestCase() {
         )
 
         for (i in 1..10) {
-            assertEquals(PLAYER_1, game.activePlayer)
+            assertEquals(PLAYER_1, game.getActivePlayer())
             game.score(PLAYER_1)
-            assertEquals(PLAYER_1, game.activePlayer)
+            assertEquals(PLAYER_1, game.getActivePlayer())
             game.score(PLAYER_1)
 
-            assertEquals(PLAYER_2, game.activePlayer)
+            assertEquals(PLAYER_2, game.getActivePlayer())
             game.score(PLAYER_2)
-            assertEquals(PLAYER_2, game.activePlayer)
+            assertEquals(PLAYER_2, game.getActivePlayer())
             game.score(PLAYER_2)
         }
 
