@@ -3,6 +3,8 @@ package se.vbgt.pingis.gui.scenes
 import javafx.application.Platform
 import javafx.event.EventHandler
 import javafx.geometry.Pos
+import javafx.geometry.Pos.BASELINE_CENTER
+import javafx.scene.Cursor
 import javafx.scene.Scene
 import javafx.scene.control.Label
 import javafx.scene.layout.GridPane
@@ -32,11 +34,10 @@ fun scoreBoardScene(pingisFX: PingisFX, game: Game): Scene {
     val bigLabels = listOf(scoreLabel1, scoreLabel2)
     val allLabels = smallLabels + bigLabels
 
-    allLabels.forEach {
-        it.alignment = Pos.BASELINE_CENTER
-    }
+    allLabels.forEach { it.alignment = BASELINE_CENTER }
 
     val main = GridPane()
+
     main.add(nameLabel1, 0, 0)
     main.add(nameLabel2, 1, 0)
     main.add(setsLabel1, 0, 1)
@@ -68,6 +69,7 @@ fun scoreBoardScene(pingisFX: PingisFX, game: Game): Scene {
     }
 
     val scene = Scene(main)
+    scene.cursor = Cursor.NONE
 
     scene.onKeyTyped = EventHandler { event ->
         when (event.character) {

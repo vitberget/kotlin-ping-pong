@@ -3,6 +3,8 @@ package se.vbgt.pingis.gui.scenes
 import javafx.application.Platform
 import javafx.event.EventHandler
 import javafx.geometry.Pos
+import javafx.geometry.Pos.BASELINE_CENTER
+import javafx.scene.Cursor
 import javafx.scene.Scene
 import javafx.scene.control.Label
 import javafx.scene.layout.GridPane
@@ -53,7 +55,7 @@ fun gameOverScene(pingisFX: PingisFX, game: Game, gameScene: Scene): Scene {
     val halfLabels = labels.flatMap { listOf(it.first, it.second) } + player1 + player2
     val allLabels = halfLabels + winner
 
-    allLabels.forEach { it.alignment = Pos.BASELINE_CENTER }
+    allLabels.forEach { it.alignment = BASELINE_CENTER }
 
     main.heightProperty().addListener { _, oldVal, newVal ->
         if (oldVal != newVal) {
@@ -76,6 +78,7 @@ fun gameOverScene(pingisFX: PingisFX, game: Game, gameScene: Scene): Scene {
     }
 
     val scene = Scene(main)
+    scene.cursor = Cursor.NONE
 
     scene.onKeyTyped = EventHandler { event ->
         when (event.character) {

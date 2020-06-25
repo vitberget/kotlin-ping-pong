@@ -3,6 +3,7 @@ package se.vbgt.pingis.gui.scenes
 import javafx.event.EventHandler
 import javafx.geometry.Insets
 import javafx.geometry.Pos
+import javafx.geometry.Pos.BASELINE_CENTER
 import javafx.scene.Scene
 import javafx.scene.control.Button
 import javafx.scene.control.Label
@@ -17,7 +18,7 @@ import se.vbgt.pingis.gui.scenes.components.NumberTextField
 fun newGameTheme(pingisFX: PingisFX): Scene {
 
     val title = Label("New game!")
-    title.alignment = Pos.BASELINE_CENTER
+    title.alignment = BASELINE_CENTER
     title.padding = Insets(0.0, 0.0, 100.0, 0.0)
 
     val main = GridPane()
