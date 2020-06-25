@@ -113,4 +113,19 @@ class GameTest : TestCase() {
         }
 
     }
+
+    fun testTwoThreeSetsCheckwinner() {
+        val game = Game(
+            player1 = Player("one"),
+            player2 = Player("two"),
+            numberOfSets = 5,
+            setThresholdWin = 11
+        )
+
+        (1..22).forEach { game.score(PLAYER_1) }
+        (1..33).forEach { game.score(PLAYER_2) }
+
+        assertTrue(game.isOver())
+        assertEquals(PLAYER_2, game.getWinner())
+    }
 }

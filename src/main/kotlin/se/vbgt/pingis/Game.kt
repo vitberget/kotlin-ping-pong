@@ -95,13 +95,13 @@ class Game(
         return sets.map { it.getWinner() }
             .fold(mapOf(), ::foldFun)
             .toList()
-            .sortedBy { it.second }
+            .sortedByDescending { it.second }
             .first()
             .first
     }
 
     private fun foldFun(acc: Map<PlayerChoice, Int>, pc: PlayerChoice): Map<PlayerChoice, Int> =
         acc.plus(pc to acc.getOrDefault(pc, 0).inc())
-    
+
     var onGameChange: ((Game) -> Unit)? = null
 }
