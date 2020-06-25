@@ -23,26 +23,12 @@ class PingisFX : Application() {
 
         this.stage = stage
 
-        removeThisThread()
-
         stage.apply {
             fullScreenExitHint = ""
             show()
         }
 
         createNewGame()
-    }
-
-    private fun removeThisThread() {
-        Thread {
-            Thread.sleep(3000)
-            startGame(
-                Game(
-                    player1 = Player("one"),
-                    player2 = Player("two")
-                )
-            )
-        }.start()
     }
 
     fun createNewGame() {
