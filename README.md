@@ -2,15 +2,16 @@
         
 ## How to play
 
-To be written
+Main class is [PingisFX.kt](src/main/kotlin/se/vbgt/pingis/gui/PingisFX.kt), run it.
 
 ### Create new game
 
-To be written
+Fill in the fields, press the button.
 
 ### Play the game
 
-To be written
+Bash some buttons on the keyboard according to the table below. 
+Remember to play some Ping-Pong for real to!
 
 | key       | action            |
 | ---       | ---               |
@@ -20,7 +21,10 @@ To be written
 
 ### Review the game
 
-To be written
+Watch the numbers, who won what set and the entire game... 
+Bragging is ok, shaming is not ok.
+
+Bash some buttons on the keyboard according to the table below.
 
 | key       | action            |
 | ---       | ---               |
