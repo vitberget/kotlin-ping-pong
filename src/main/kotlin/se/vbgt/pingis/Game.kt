@@ -95,8 +95,7 @@ class Game(
         return sets.map { it.getWinner() }
             .fold(mapOf(), ::foldFun)
             .toList()
-            .sortedByDescending { it.second }
-            .first()
+            .maxBy { it.second }!!
             .first
     }
 

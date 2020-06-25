@@ -2,7 +2,6 @@ package se.vbgt.pingis.gui.scenes
 
 import javafx.application.Platform
 import javafx.event.EventHandler
-import javafx.geometry.Pos
 import javafx.geometry.Pos.BASELINE_CENTER
 import javafx.scene.Cursor
 import javafx.scene.Scene
@@ -27,8 +26,8 @@ fun scoreBoardScene(pingisFX: PingisFX, game: Game): Scene {
     listOf(scoreLabel1, setsLabel1, nameLabel1).forEach { it.background = background1 }
     listOf(scoreLabel2, setsLabel2, nameLabel2).forEach { it.background = background2 }
 
-    scoreLabel1.underlineProperty().set(game.getActivePlayer() == PLAYER_1)
-    scoreLabel2.underlineProperty().set(game.getActivePlayer() == PLAYER_2)
+    scoreLabel1.underlineProperty().value = game.getActivePlayer() == PLAYER_1
+    scoreLabel2.underlineProperty().value  = game.getActivePlayer() == PLAYER_2
 
     val smallLabels = listOf(nameLabel1, nameLabel2, setsLabel1, setsLabel2)
     val bigLabels = listOf(scoreLabel1, scoreLabel2)
@@ -89,8 +88,8 @@ fun scoreBoardScene(pingisFX: PingisFX, game: Game): Scene {
                 setsLabel1.text = "${gameState.getSetScore(PLAYER_1)}"
                 setsLabel2.text = "${gameState.getSetScore(PLAYER_2)}"
 
-                scoreLabel1.underlineProperty().set(gameState.getActivePlayer() == PLAYER_1)
-                scoreLabel2.underlineProperty().set(gameState.getActivePlayer() == PLAYER_2)
+                scoreLabel1.underlineProperty().value = gameState.getActivePlayer() == PLAYER_1
+                scoreLabel2.underlineProperty().value = gameState.getActivePlayer() == PLAYER_2
             }
     }
 

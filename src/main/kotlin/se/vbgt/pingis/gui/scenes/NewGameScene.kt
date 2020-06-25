@@ -2,7 +2,6 @@ package se.vbgt.pingis.gui.scenes
 
 import javafx.event.EventHandler
 import javafx.geometry.Insets
-import javafx.geometry.Pos
 import javafx.geometry.Pos.BASELINE_CENTER
 import javafx.scene.Scene
 import javafx.scene.control.Button
@@ -44,8 +43,8 @@ fun newGameTheme(pingisFX: PingisFX): Scene {
         labelSets
     )
 
-    val name1 = TextField("one")
-    val name2 = TextField("two")
+    val name1 = TextField("One")
+    val name2 = TextField("Two")
     val sets = NumberTextField("5")
     val balls = NumberTextField("11")
     val serves = NumberTextField("1")
@@ -99,7 +98,5 @@ fun newGameTheme(pingisFX: PingisFX): Scene {
         }
     }
 
-    val scene = Scene(main)
-
-    return scene
+    return Scene(main)
 }

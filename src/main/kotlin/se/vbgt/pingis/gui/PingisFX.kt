@@ -5,7 +5,6 @@ import javafx.application.Platform
 import javafx.scene.Scene
 import javafx.stage.Stage
 import se.vbgt.pingis.Game
-import se.vbgt.pingis.Player
 import se.vbgt.pingis.gui.scenes.gameOverScene
 import se.vbgt.pingis.gui.scenes.newGameTheme
 import se.vbgt.pingis.gui.scenes.scoreBoardScene
@@ -15,7 +14,7 @@ class PingisFX : Application() {
 
     lateinit var stage: Stage
 
-    val newGameScene = newGameTheme(this)
+    private val newGameScene = newGameTheme(this)
 
     override fun start(stage: Stage?) {
         requireNotNull(stage)

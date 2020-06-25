@@ -1,10 +1,9 @@
 package se.vbgt.pingis
 
-import se.vbgt.pingis.PlayerChoice
 import se.vbgt.pingis.PlayerChoice.PLAYER_1
 import se.vbgt.pingis.PlayerChoice.PLAYER_2
 
-class Set(val thresholdWin: Int) {
+class Set(private val thresholdWin: Int) {
     var scorePlayer1 = 0
         private set
     var scorePlayer2 = 0

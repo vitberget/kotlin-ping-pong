@@ -122,8 +122,10 @@ class GameTest : TestCase() {
             setThresholdWin = 11
         )
 
-        (1..22).forEach { game.score(PLAYER_1) }
-        (1..33).forEach { game.score(PLAYER_2) }
+        for (i in 1..22)
+            game.score(PLAYER_1)
+        for (i in 1..33)
+            game.score(PLAYER_2)
 
         assertTrue(game.isOver())
         assertEquals(PLAYER_2, game.getWinner())

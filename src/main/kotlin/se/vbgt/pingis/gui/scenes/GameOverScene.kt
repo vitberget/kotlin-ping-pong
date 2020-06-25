@@ -2,7 +2,6 @@ package se.vbgt.pingis.gui.scenes
 
 import javafx.application.Platform
 import javafx.event.EventHandler
-import javafx.geometry.Pos
 import javafx.geometry.Pos.BASELINE_CENTER
 import javafx.scene.Cursor
 import javafx.scene.Scene
