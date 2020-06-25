@@ -21,3 +21,8 @@ To be written
 ### Review the game
 
 To be written
+
+| key       | action            |
+| ---       | ---               |
+| n         | go to new game creation |
+| u         | undo last score, go back to playing the game    |

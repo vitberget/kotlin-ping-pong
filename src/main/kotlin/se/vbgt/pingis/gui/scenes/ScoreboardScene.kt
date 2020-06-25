@@ -6,20 +6,13 @@ import javafx.geometry.Pos
 import javafx.scene.Scene
 import javafx.scene.control.Label
 import javafx.scene.layout.GridPane
-import javafx.scene.paint.Color
 import javafx.scene.text.Font
 import se.vbgt.pingis.Game
 import se.vbgt.pingis.PlayerChoice.PLAYER_1
 import se.vbgt.pingis.PlayerChoice.PLAYER_2
 import se.vbgt.pingis.gui.PingisFX
-import se.vbgt.pingis.gui.backgroundWithColor
 
 fun scoreBoardScene(pingisFX: PingisFX, game: Game): Scene {
-    val fontFamily = "Arial"
-
-    val background1 = backgroundWithColor(Color(0.9, 0.8, 0.8, 1.0))
-    val background2 = backgroundWithColor(Color(0.8, 0.8, 0.9, 1.0))
-
     val nameLabel1 = Label(game.player1.name)
     val nameLabel2 = Label(game.player2.name)
 
@@ -41,21 +34,6 @@ fun scoreBoardScene(pingisFX: PingisFX, game: Game): Scene {
 
     allLabels.forEach {
         it.alignment = Pos.BASELINE_CENTER
-    }
-
-    game.onGameChange = { gameState: Game ->
-        if (gameState.isOver())
-            pingisFX.gameOver(gameState)
-        else
-            Platform.runLater {
-                scoreLabel1.text = "${gameState.getScore(PLAYER_1)}"
-                scoreLabel2.text = "${gameState.getScore(PLAYER_2)}"
-                setsLabel1.text = "${gameState.getSetScore(PLAYER_1)}"
-                setsLabel2.text = "${gameState.getSetScore(PLAYER_2)}"
-
-                scoreLabel1.underlineProperty().set(gameState.getActivePlayer() == PLAYER_1)
-                scoreLabel2.underlineProperty().set(gameState.getActivePlayer() == PLAYER_2)
-            }
     }
 
     val main = GridPane()
@@ -89,9 +67,9 @@ fun scoreBoardScene(pingisFX: PingisFX, game: Game): Scene {
         }
     }
 
-    val myScene = Scene(main)
+    val scene = Scene(main)
 
-    myScene.onKeyTyped = EventHandler { event ->
+    scene.onKeyTyped = EventHandler { event ->
         when (event.character) {
             "z" -> game.score(PLAYER_1)
             "x" -> game.score(PLAYER_2)
@@ -99,5 +77,20 @@ fun scoreBoardScene(pingisFX: PingisFX, game: Game): Scene {
         }
     }
 
-    return myScene
+    game.onGameChange = { gameState: Game ->
+        if (gameState.isOver())
+            pingisFX.gameOver(gameState, scene)
+        else
+            Platform.runLater {
+                scoreLabel1.text = "${gameState.getScore(PLAYER_1)}"
+                scoreLabel2.text = "${gameState.getScore(PLAYER_2)}"
+                setsLabel1.text = "${gameState.getSetScore(PLAYER_1)}"
+                setsLabel2.text = "${gameState.getSetScore(PLAYER_2)}"
+
+                scoreLabel1.underlineProperty().set(gameState.getActivePlayer() == PLAYER_1)
+                scoreLabel2.underlineProperty().set(gameState.getActivePlayer() == PLAYER_2)
+            }
+    }
+
+    return scene
 }

@@ -2,6 +2,7 @@ package se.vbgt.pingis.gui
 
 import javafx.application.Application
 import javafx.application.Platform
+import javafx.scene.Scene
 import javafx.stage.Stage
 import se.vbgt.pingis.Game
 import se.vbgt.pingis.Player
@@ -60,8 +61,8 @@ class PingisFX : Application() {
         }
     }
 
-    fun gameOver(game: Game) {
-        val gameOverScene = gameOverScene(this, game)
+    fun gameOver(game: Game, scene: Scene) {
+        val gameOverScene = gameOverScene(this, game, scene)
 
         Platform.runLater {
             stage.scene = gameOverScene
