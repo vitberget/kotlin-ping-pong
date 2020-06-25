@@ -4,6 +4,12 @@
 
 Main class is [PingisFX.kt](src/main/kotlin/se/vbgt/pingis/gui/PingisFX.kt), run it.
 
+```sh
+# In terminal you can...
+mvn package
+mvn exec:java
+```
+
 ### Create new game
 
 Fill in the fields, press the button.
