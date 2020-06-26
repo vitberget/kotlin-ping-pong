@@ -19,6 +19,8 @@ Fill in the fields, press the button.
 Bash some buttons on the keyboard according to the table below. 
 Remember to play some Ping-Pong for real to!
 
+The player which has the underscore under their score is the one who should serve.
+
 | key       | action            |
 | ---       | ---               |
 | z         | score for player 1 |
@@ -29,6 +31,8 @@ Remember to play some Ping-Pong for real to!
 
 Watch the numbers, who won what set and the entire game... 
 Bragging is ok, shaming is not ok.
+
+Underscores indicates the winner of each set.
 
 Bash some buttons on the keyboard according to the table below.
 
