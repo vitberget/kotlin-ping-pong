@@ -8,7 +8,7 @@ class Game(
     val player2: Player,
     val numberOfSets: Int = 5,
     val setThresholdWin: Int = 11,
-    val ballsBeforeSwitch: Int = 1
+    val ballsBeforeSwitch: Int = 2
 ) {
     init {
         require(numberOfSets >= 1) { "Must have sets" }

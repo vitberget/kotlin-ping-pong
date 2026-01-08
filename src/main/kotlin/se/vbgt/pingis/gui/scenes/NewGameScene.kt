@@ -47,7 +47,7 @@ fun newGameTheme(pingisFX: PingisFX): Scene {
     val name2 = TextField("Two")
     val sets = NumberTextField("5")
     val balls = NumberTextField("11")
-    val serves = NumberTextField("1")
+    val serves = NumberTextField("2")
     main.add(name1, 1, 1)
     main.add(name2, 1, 2)
     main.add(sets, 1, 3)
